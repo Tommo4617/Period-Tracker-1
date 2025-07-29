@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Period_tracker_1
 {
@@ -42,11 +43,12 @@ namespace Period_tracker_1
         {
             bool validUsername = false;
             bool validPassword = false;
+            string username = "";
 
             while (!validUsername)
             {
                 Console.WriteLine("Please enter your username:");
-                string username = Console.ReadLine();
+                username = Console.ReadLine();
                 if (!string.IsNullOrEmpty(username))
                 {
                     validUsername = true;
@@ -69,8 +71,9 @@ namespace Period_tracker_1
                 {
                     validPassword = true;
                     Console.WriteLine("Password confirmed, navigating back to the main menu.");
+                    File.AppendAllText("loginList.txt", $"{username}:{password}\n");
 
-                    for(int i = 0; i < 3; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         Console.Write(".");
                         Thread.Sleep(500);
