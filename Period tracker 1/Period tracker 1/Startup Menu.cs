@@ -22,12 +22,13 @@ namespace Period_tracker_1
             {
                 case 1:
                     Console.WriteLine("Login selected.");
+                    login();
                     // Add login logic here
                     break;
                 case 2:
                     Console.WriteLine("Sign Up selected.");
                     SignUp();
-                    // Add sign-up logic here
+
                     break;
                 case 3:
                     Console.WriteLine("Exiting the application.");
@@ -92,6 +93,34 @@ namespace Period_tracker_1
 
 
 
+        }
+
+        private void login()
+        {
+            bool matchFound = false;
+
+            while (!matchFound)
+            {
+                Console.WriteLine("Please enter your username:");
+                string username = Console.ReadLine();
+                Console.WriteLine("Please enter your password:");
+                string password = Console.ReadLine();
+                string[] loginList = File.ReadAllLines("loginList.txt");
+                foreach (string login in loginList)
+                {
+                    if(login.StartsWith(username + ":") && login.EndsWith(":" + password))
+                    {
+                        matchFound = true;
+                        Console.WriteLine("Login successful! Welcome back, " + username + ".");
+                        // Navigate to the main menu or dashboard
+                        break;
+                    }
+                }
+                if (!matchFound)
+                {
+                    Console.WriteLine("Login failed. Please check your username and password and try again.");
+                }
+            }
         }
     }
 }
