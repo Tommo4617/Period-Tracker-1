@@ -23,7 +23,6 @@ namespace Period_tracker_1
                 case 1:
                     Console.WriteLine("Login selected.");
                     login();
-                    // Add login logic here
                     break;
                 case 2:
                     Console.WriteLine("Sign Up selected.");
@@ -31,7 +30,12 @@ namespace Period_tracker_1
 
                     break;
                 case 3:
-                    Console.WriteLine("Exiting the application.");
+                    Console.Write("Exiting");
+                    for (int i=0; i < 3; i++)
+                    { 
+                        Thread.Sleep(500);
+                        Console.Write(".");
+                    }
                     Environment.Exit(0);
                     break;
                 default:
@@ -44,7 +48,14 @@ namespace Period_tracker_1
         {
             bool validUsername = false;
             bool validPassword = false;
+<<<<<<< Updated upstream
             string username = "";
+=======
+            bool validPStart = false;
+            string username = "";
+            string password = "";
+            DateTime periodStart = DateTime.MinValue;
+>>>>>>> Stashed changes
 
             while (!validUsername)
             {
@@ -64,12 +75,13 @@ namespace Period_tracker_1
             while (!validPassword)
             {
                 Console.WriteLine("Please enter your password:");
-                string password = Console.ReadLine();
+                password = Console.ReadLine();
                 Console.WriteLine("Please confirm your password:");
                 string passwordConfirm = Console.ReadLine();
 
                 if(!string.IsNullOrEmpty(password) && password == passwordConfirm)
                 {
+<<<<<<< Updated upstream
                     validPassword = true;
                     Console.WriteLine("Password confirmed, navigating back to the main menu.");
                     File.AppendAllText("loginList.txt", $"{username}:{password}\n");
@@ -82,12 +94,41 @@ namespace Period_tracker_1
                     Startup_Menu startup_Menu = new Startup_Menu();
                     startup_Menu.DisplayMenu();
                     startup_Menu.ChoiceAction(int.Parse(Console.ReadLine()));
+=======
+                    validPassword = true;    
+>>>>>>> Stashed changes
 
                 }
                 else
                 {
                     Console.WriteLine("Password is invalid or does not match, please try again.");
                 }
+            }
+            while (!validPStart)
+            {
+
+                Console.WriteLine("PLease enter the start date if your last period (DD/MM/YYYY):");
+                string periodStartInput = Console.ReadLine();
+                try
+                {
+                    periodStart = DateTime.ParseExact(periodStartInput, "dd/MM/yyyy", null);
+                    validPStart = true;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid date format. Please enter the date in DD/MM/YYYY format.");
+                }
+
+                File.AppendAllText("loginList.txt", $"{username}:{password}:{periodStart.ToString("dd/MM/yyyy")}\n");
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.Write(".");
+                    Thread.Sleep(500);
+                }
+                Startup_Menu startup_Menu = new Startup_Menu();
+                startup_Menu.DisplayMenu();
+                startup_Menu.ChoiceAction(int.Parse(Console.ReadLine()));
             }
             
 
