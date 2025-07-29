@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Period_tracker_1;
+string loginList = "loginList.txt";
 
 MenuMaker startupMenu = new Startup_Menu();
 startupMenu.DisplayMenu();
